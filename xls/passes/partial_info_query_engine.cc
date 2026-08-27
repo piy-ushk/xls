@@ -653,8 +653,12 @@ bool IsExpensiveToEvaluate(
       Op::kSMod,
   });
   if (is_complex_evaluation) {
-    return node->operand(0)->GetType()->GetFlatBitCount() >
-           kComplexEvaluationLimit;
+    for (Node* op : node->operands()) {
+      if (op->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+        return true;
+      }
+    }
+    return false;
   }
   // Compound data types can get enormous. Put a limit on how much data we are
   // willing to carry around.

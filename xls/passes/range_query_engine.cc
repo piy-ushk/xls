@@ -1203,7 +1203,8 @@ absl::Status RangeQueryVisitor::HandleReverse(UnOp* reverse) {
 
 absl::Status RangeQueryVisitor::HandleSDiv(BinOp* div) {
   INITIALIZE_OR_SKIP(div);
-  if (div->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (div->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      div->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         div, IntervalSet::Maximal(div->GetType()->GetFlatBitCount()));
   }
@@ -1242,7 +1243,8 @@ absl::Status RangeQueryVisitor::HandleSLt(CompareOp* lt) {
 
 absl::Status RangeQueryVisitor::HandleSMod(BinOp* mod) {
   INITIALIZE_OR_SKIP(mod);
-  if (mod->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (mod->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      mod->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         mod, IntervalSet::Maximal(mod->GetType()->GetFlatBitCount()));
   }
@@ -1253,7 +1255,8 @@ absl::Status RangeQueryVisitor::HandleSMod(BinOp* mod) {
 
 absl::Status RangeQueryVisitor::HandleSMul(ArithOp* mul) {
   INITIALIZE_OR_SKIP(mul);
-  if (mul->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (mul->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      mul->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         mul, IntervalSet::Maximal(mul->GetType()->GetFlatBitCount()));
   }
@@ -1402,7 +1405,8 @@ absl::Status RangeQueryVisitor::HandleTupleIndex(TupleIndex* index) {
 
 absl::Status RangeQueryVisitor::HandleUDiv(BinOp* div) {
   INITIALIZE_OR_SKIP(div);
-  if (div->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (div->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      div->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         div, IntervalSet::Maximal(div->GetType()->GetFlatBitCount()));
   }
@@ -1445,7 +1449,8 @@ absl::Status RangeQueryVisitor::HandleULt(CompareOp* lt) {
 
 absl::Status RangeQueryVisitor::HandleUMod(BinOp* mod) {
   INITIALIZE_OR_SKIP(mod);
-  if (mod->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (mod->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      mod->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         mod, IntervalSet::Maximal(mod->GetType()->GetFlatBitCount()));
   }
@@ -1457,7 +1462,8 @@ absl::Status RangeQueryVisitor::HandleUMod(BinOp* mod) {
 
 absl::Status RangeQueryVisitor::HandleUMul(ArithOp* mul) {
   INITIALIZE_OR_SKIP(mul);
-  if (mul->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
+  if (mul->operand(0)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit ||
+      mul->operand(1)->GetType()->GetFlatBitCount() > kComplexEvaluationLimit) {
     return SetIntervalSet(
         mul, IntervalSet::Maximal(mul->GetType()->GetFlatBitCount()));
   }
